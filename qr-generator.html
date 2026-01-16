@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>QR Code Generator</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(to bottom, #0a0e27, #1a1a2e);
+            font-family: Arial, sans-serif;
+            color: #fff;
+        }
+        h1 {
+            color: #00ff88;
+            margin-bottom: 20px;
+        }
+        #qrcode {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px;
+        }
+        .instructions {
+            text-align: center;
+            color: #00ff88;
+            margin-top: 20px;
+        }
+        button {
+            margin-top: 20px;
+            padding: 15px 30px;
+            font-size: 18px;
+            background: #00ff88;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+</head>
+<body>
+    <h1>🚀 Space Shooter Game QR Code</h1>
+    <div id="qrcode"></div>
+    <div class="instructions">
+        <p>Scan this QR code to play the game!</p>
+        <p><strong>URL:</strong> https://prafull2027.github.io/space-shooter-game/</p>
+        <button onclick="downloadQR()">Download QR Code</button>
+    </div>
+
+    <script>
+        // Generate QR code
+        new QRCode(document.getElementById("qrcode"), {
+            text: "https://prafull2027.github.io/space-shooter-game/",
+            width: 300,
+            height: 300,
+            colorDark: "#000000",
+            colorLight: "#ffffff",
+            correctLevel: QRCode.CorrectLevel.H
+        });
+
+        // Download QR code
+        function downloadQR() {
+            const canvas = document.querySelector('#qrcode canvas');
+            const url = canvas.toDataURL('image/png');
+            const link = document.createElement('a');
+            link.download = 'space-shooter-qr-code.png';
+            link.href = url;
+            link.click();
+        }
+    </script>
+</body>
+</html>
