@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Generate Preview Image</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #000;
+        }
+        canvas {
+            border: 2px solid #00ff88;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="preview" width="1200" height="630"></canvas>
+    <script>
+        const canvas = document.getElementById('preview');
+        const ctx = canvas.getContext('2d');
+
+        // Background gradient
+        const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+        gradient.addColorStop(0, '#0a0e27');
+        gradient.addColorStop(0.5, '#1a1a2e');
+        gradient.addColorStop(1, '#16213e');
+        ctx.fillStyle = gradient;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        // Stars
+        for (let i = 0; i < 200; i++) {
+            ctx.fillStyle = '#fff';
+            ctx.globalAlpha = Math.random();
+            const x = Math.random() * canvas.width;
+            const y = Math.random() * canvas.height;
+            const size = Math.random() * 3;
+            ctx.fillRect(x, y, size, size);
+        }
+        ctx.globalAlpha = 1;
+
+        // Title
+        ctx.font = 'bold 80px Arial';
+        ctx.fillStyle = '#00ff88';
+        ctx.textAlign = 'center';
+        ctx.shadowBlur = 20;
+        ctx.shadowColor = '#00ff88';
+        ctx.fillText('🚀 ULTIMATE SPACE SHOOTER 🚀', canvas.width / 2, 120);
+
+        // Subtitle
+        ctx.font = 'bold 40px Arial';
+        ctx.fillStyle = '#ffffff';
+        ctx.shadowBlur = 10;
+        ctx.shadowColor = '#ffffff';
+        ctx.fillText('Epic Boss Battles & Power-ups!', canvas.width / 2, 180);
+
+        // Draw spaceship
+        ctx.shadowBlur = 0;
+        ctx.fillStyle = '#00ff88';
+        ctx.beginPath();
+        ctx.moveTo(canvas.width / 2, 250);
+        ctx.lineTo(canvas.width / 2 - 60, 350);
+        ctx.lineTo(canvas.width / 2, 330);
+        ctx.lineTo(canvas.width / 2 + 60, 350);
+        ctx.closePath();
+        ctx.fill();
+
+        // Engine glow
+        ctx.fillStyle = '#ff6600';
+        ctx.globalAlpha = 0.8;
+        ctx.fillRect(canvas.width / 2 - 15, 350, 30, 20);
+        ctx.globalAlpha = 1;
+
+        // Draw boss
+        ctx.fillStyle = '#ff0055';
+        ctx.shadowBlur = 30;
+        ctx.shadowColor = '#ff0055';
+        ctx.beginPath();
+        ctx.arc(canvas.width / 2, 450, 80, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.shadowBlur = 0;
+
+        // Boss eyes
+        ctx.fillStyle = '#000';
+        ctx.fillRect(canvas.width / 2 - 35, 430, 20, 30);
+        ctx.fillRect(canvas.width / 2 + 15, 430, 20, 30);
+
+        // Features
+        const features = [
+            '🛡️ Power-Ups',
+            '👾 Boss Battles',
+            '📱 Mobile Support',
+            '⚡ Rapid Fire',
+            '✨ Multi-Shot',
+            '🎯 Progressive Levels'
+        ];
+
+        ctx.font = 'bold 28px Arial';
+        const startY = 320;
+        const leftX = 150;
+        const rightX = canvas.width - 150;
+
+        for (let i = 0; i < features.length; i++) {
+            if (i < 3) {
+                ctx.fillStyle = '#00ff88';
+                ctx.textAlign = 'left';
+                ctx.fillText(features[i], leftX, startY + i * 45);
+            } else {
+                ctx.fillStyle = '#ffaa00';
+                ctx.textAlign = 'right';
+                ctx.fillText(features[i], rightX, startY + (i - 3) * 45);
+            }
+        }
+
+        // Call to action
+        ctx.font = 'bold 50px Arial';
+        ctx.fillStyle = '#ffffff';
+        ctx.textAlign = 'center';
+        ctx.shadowBlur = 15;
+        ctx.shadowColor = '#00ff88';
+        ctx.fillText('PLAY NOW FOR FREE!', canvas.width / 2, 570);
+        
+        // Instructions
+        ctx.shadowBlur = 0;
+        ctx.font = '20px Arial';
+        ctx.fillStyle = '#aaaaaa';
+        ctx.fillText('Right-click on the image above and "Save As..." preview.png', canvas.width / 2, canvas.height - 30);
+
+        console.log('Preview image generated! Right-click and save as "preview.png"');
+    </script>
+</body>
+</html>
